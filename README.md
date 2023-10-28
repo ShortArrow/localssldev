@@ -2,12 +2,12 @@
 
 ## Description
 
-There is an HTTP service running within the LAN, assigned to an arbitrary IP. I want to launch a Docker container that sets up an HTTPS proxy to this HTTP service using letsencrypt, certbot, and nginx. I want to be able to access this from within the host machine where the proxy container is running, using <https://local.hoge.jp>
+There is an HTTP service running within the LAN, assigned to an arbitrary IP. I want to launch a Docker container that sets up an HTTPS proxy to this HTTP service using letsencrypt, certbot, cloudflare and nginx. I want to be able to access this from within the host machine where the proxy container is running, using <https://local.hoge.jp>.
 
-- Utilize docker-compose.
+- Utilize `docker compose`.
 - The A record of `local.hoge.jp` is managed by Cloudflare DNS.
 - The A record of `local.hoge.jp` should be fixed at `127.0.0.1`.
-- Ensure the certbot renew command is executed periodically as configured.
+- Ensure the `certbot renew` command is executed periodically as configured.
 - Allow the setting of `local.hoge.jp` and the LAN internal IP in the `.env` file.
 - I want to obtain a "real HTTPS certificate"  using DNS authentication.
 - "real HTTPS certificate" means that a certificate that can be verified with a certificate already in the certificate store
