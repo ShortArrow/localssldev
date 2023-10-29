@@ -11,7 +11,37 @@ There is an HTTP service running within the LAN, assigned to an arbitrary IP. I 
 - Allow the setting of `local.hoge.jp` and the LAN internal IP in the `.env` file.
 - I want to obtain a "real HTTPS certificate"  using DNS authentication.
 - "real HTTPS certificate" means that a certificate that can be verified with a certificate already in the certificate store
-- Write the `DOMAIN` and `IP` in the `.env` file just once.
+- Write the `DOMAIN` and `LAN_IP` in the `.env` file just once.
+
+## Architecture
+
+```Mermaid
+sequenceDiagram
+    box darkred your local machine
+        participant A as User
+        participant J as ThisTool
+    end
+    box darkblue Coudflare
+        participant F as DNS
+    end
+    box darkgreen dev server in your LAN
+        participant B as ContainerA
+        participant C as ContainerB
+    end
+
+    A->>F: where is `local.hoge.jp`
+    F->>A: that is `127.0.0.1`
+    A->>J: `https://127.0.0.1:443`
+    J->>B: please content of `http://192.168.0.123:3000`
+    B->>J: This is contents
+    J->>A: This is your wants
+    A->>F: where is `api.hoge.jp`
+    F->>A: that is `https://127.0.0.1`
+    A->>J: `https://127.0.0.1:4443`
+    J->>C: please content of `http://192.168.0.123:3333`
+    C->>J: This is contents
+    J->>A: This is your wants
+```
 
 ## Usage
 
@@ -32,6 +62,9 @@ dns_cloudflare_api_token = YOUR_API_TOKEN
 Make your own `.env` file.
 
 ```text
-DOMAIN=local.hogehoge.jp
+DOMAIN=local.hoge.jp
 LAN_IP=192.168.0.123:3000
+DOMAIN2=api.hoge.jp
+LAN_IP2=192.168.0.123:3333
+EMAIL=your_cloudflare_account_email_address@email.jp
 ```
