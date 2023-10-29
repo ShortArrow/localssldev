@@ -68,3 +68,8 @@ DOMAIN2=api.hoge.jp
 LAN_IP2=192.168.0.123:3333
 EMAIL=your_cloudflare_account_email_address@email.jp
 ```
+
+## Disclaimer
+
+This tool is for local development only.
+Do not use it in a production environment.
