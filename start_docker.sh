@@ -1,1 +1,1 @@
-docker-compose run --rm certbot && docker compose up
+docker compose up
