@@ -15,7 +15,7 @@ There is an HTTP service running within the LAN, assigned to an arbitrary IP. I 
 
 ## Architecture
 
-```Mermaid
+```mermaid
 sequenceDiagram
     box darkred your local machine
         participant A as User
